@@ -1,6 +1,6 @@
 # Portify
 
-[![Build Status](https://dev.azure.com/ramosisw/portify/_apis/build/status/ramosisw.portify?branchName=master)](https://dev.azure.com/ramosisw/portify/_build/latest?definitionId=7&branchName=master)
+[![Deploy to GitHub Pages](https://github.com/JulioRamos0/portify/actions/workflows/main.yml/badge.svg)](https://github.com/JulioRamos0/portify/actions/workflows/main.yml)
 
 Portify is a React-based web application that allows you to effortlessly manage your Spotify playlists by exporting them to or importing them from a JSON file.
 
