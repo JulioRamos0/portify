@@ -1,7 +1,4 @@
-import CloudDownload from '@material-ui/icons/CloudDownload';
-import CloudUpload from '@material-ui/icons/CloudUpload';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
