@@ -4,13 +4,14 @@ import Container from '@material-ui/core/Container';
 import MuiAppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import { userActions } from '../actions';
-import { Link as RouterLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { config } from '../config';
 import PropTypes from 'prop-types';
 import React from 'react';
+import IconButton from '@material-ui/core/IconButton';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+import { ThemeContext } from '../ThemeContext';
 
 const styles = theme => ({
   root: {
@@ -27,10 +28,6 @@ const styles = theme => ({
     marginRight: 10
   },
 });
-
-const LoginLink = React.forwardRef((props, ref) => (
-  <RouterLink innerRef={ref} to={"/login"} {...props} />
-));
 
 class AppBar extends React.Component {
   state = {
@@ -53,7 +50,6 @@ class AppBar extends React.Component {
               <Typography variant={"h6"} className={classes.title}>
                 Portify
               </Typography>
-              <Link to="/about">About</Link>
               {this.state.userLoged &&
                 <Typography component={"p"}
                   color={"inherit"}
@@ -65,15 +61,20 @@ class AppBar extends React.Component {
                 </Typography>
               }
               {this.state.userLoged ?
-                <Link
-                  component={LoginLink}
-                  variant={"body2"}
-                  color={"inherit"}
-                >
-                  It's no me
-                </Link> :
-                <Button color={"inherit"} component={LoginLink} size={"small"}>Login</Button>
+                <Button color={"inherit"} onClick={() => { localStorage.removeItem(config.loggedItem); window.location.reload(); }} size={"small"}>Logout</Button> :
+                <Button color={"inherit"} onClick={() => this.props.dispatch(userActions.login())} size={"small"}>Login</Button>
               }
+              <ThemeContext.Consumer>
+                {({ themeMode, setThemeMode }) => (
+                  <IconButton
+                    color="inherit"
+                    onClick={() => setThemeMode(themeMode === 'light' ? 'dark' : 'light')}
+                    style={{ marginLeft: 16 }}
+                  >
+                    <Brightness4Icon />
+                  </IconButton>
+                )}
+              </ThemeContext.Consumer>
             </Toolbar>
           </Container>
         </MuiAppBar>

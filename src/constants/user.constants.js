@@ -11,5 +11,9 @@ export const userConstants = {
 
     IMPORT_REQUEST: `${context}_IMPORT_REQUEST`,
     IMPORT_SUCCESS: `${context}_IMPORT_SUCCESS`,
-    IMPORT_FAILURE: `${context}_IMPORT_FAILURE`
+    IMPORT_FAILURE: `${context}_IMPORT_FAILURE`,
+
+    PREVIEW_REQUEST: `${context}_PREVIEW_REQUEST`,
+    PREVIEW_SUCCESS: `${context}_PREVIEW_SUCCESS`,
+    PREVIEW_FAILURE: `${context}_PREVIEW_FAILURE`
 }

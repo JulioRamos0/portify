@@ -6,29 +6,53 @@ import Snackbar from '@material-ui/core/Snackbar';
 import { alertActions } from './actions';
 import { connect } from 'react-redux';
 import { history } from './helpers';
-import Login from './Login'
 import React from 'react';
 import Main from './Main';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { ThemeContext } from './ThemeContext';
 
-const theme = createMuiTheme({
-  palette: {
-    type: "dark",
-    primary: {
-      main: "#000",
-      contrastText: "#fff"
+function ThemeWrapper({ children }) {
+  const [themeMode, setThemeMode] = React.useState(localStorage.getItem('themeMode') || 'system');
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  React.useEffect(() => {
+    localStorage.setItem('themeMode', themeMode);
+  }, [themeMode]);
+
+  const theme = React.useMemo(
+    () => {
+      const isDark = themeMode === 'system' ? prefersDarkMode : themeMode === 'dark';
+      return createMuiTheme({
+        palette: {
+          type: isDark ? 'dark' : 'light',
+          primary: {
+            main: "#000",
+            contrastText: "#fff"
+          },
+          secondary: {
+            main: "#2ebd59",
+            contrastText: "#fff"
+          }
+        },
+        typography: {
+          useNextVariants: true,
+        },
+        root: {
+          display: 'flex',
+        },
+      });
     },
-    secondary: {
-      main: "#2ebd59",
-      contrastText: "#fff"
-    }
-  },
-  typography: {
-    useNextVariants: true,
-  },
-  root: {
-    display: 'flex',
-  },
-});
+    [themeMode, prefersDarkMode]
+  );
+
+  return (
+    <ThemeContext.Provider value={{ themeMode, setThemeMode }}>
+      <MuiThemeProvider theme={theme}>
+        {children}
+      </MuiThemeProvider>
+    </ThemeContext.Provider>
+  );
+}
 
 class App extends React.Component {
 
@@ -43,7 +67,7 @@ class App extends React.Component {
     const { alert } = this.props;
     return (
       <Router history={history}>
-        <MuiThemeProvider theme={theme}>
+        <ThemeWrapper>
           {alert.message &&
             <Snackbar
               anchorOrigin={{
@@ -64,11 +88,10 @@ class App extends React.Component {
           }
           <Route path={"/"}>
             <Switch>
-              <Route path={"/login"} component={Login} />
               <Route path={"/"} component={Main} />
             </Switch>
           </Route>
-        </MuiThemeProvider>
+        </ThemeWrapper>
       </Router>
     );
   }
