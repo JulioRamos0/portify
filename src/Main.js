@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import { config } from './config';
 import { alertActions, userActions } from './actions'
 import MigrationWizard from './components/MigrationWizard';
+import Link from '@material-ui/core/Link';
 
 const styles = theme => ({
     appBarSpacer: {
@@ -109,6 +110,27 @@ class Main extends Component {
         this.props.dispatch(userActions.login());
     }
 
+    onLoadBackupClick = () => {
+        this.fileInput.click();
+    }
+
+    onFileChange = (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const data = JSON.parse(e.target.result);
+                this.props.dispatch(userActions.loadBackup(data));
+                this.setState({ userLoged: true });
+            } catch (error) {
+                this.props.dispatch(alertActions.error("El archivo no es válido."));
+            }
+        };
+        reader.readAsText(file);
+    }
+
     render() {
         const { classes } = this.props;
         return (
@@ -125,7 +147,7 @@ class Main extends Component {
                             </Typography>
 
                             {!this.state.userLoged && (
-                                <Grid container justify="center" style={{ marginTop: 24 }}>
+                                <Grid container direction="column" alignItems="center" style={{ marginTop: 24 }}>
                                     <Button
                                         onClick={this.onLogin}
                                         variant="contained"
@@ -134,6 +156,21 @@ class Main extends Component {
                                     >
                                         Comenzar
                                     </Button>
+                                    <Link
+                                        component="button"
+                                        variant="body2"
+                                        onClick={this.onLoadBackupClick}
+                                        style={{ marginTop: 16 }}
+                                    >
+                                        Usar respaldo
+                                    </Link>
+                                    <input
+                                        type="file"
+                                        accept=".json"
+                                        ref={input => this.fileInput = input}
+                                        style={{ display: 'none' }}
+                                        onChange={this.onFileChange}
+                                    />
                                 </Grid>
                             )}
                             {this.state.userLoged &&

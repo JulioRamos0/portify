@@ -48,7 +48,7 @@ function getSteps() {
 
 function MigrationWizard(props) {
     const classes = useStyles();
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, setActiveStep] = useState(props.user.isFromBackup ? 2 : 0);
     const [isMigrating, setIsMigrating] = useState(false);
     const [migrationProgress, setMigrationProgress] = useState("");
     const steps = getSteps();
@@ -282,6 +282,17 @@ function MigrationWizard(props) {
                             >
                                 Conectar nueva cuenta
                             </Button>
+                        )}
+                        {!props.user.isFromBackup && (
+                            <div style={{ marginTop: 16 }}>
+                                <Button
+                                    color="default"
+                                    onClick={() => props.dispatch(userActions.exportData())}
+                                    style={{ textDecoration: 'underline', textTransform: 'none' }}
+                                >
+                                    Descargar respaldo
+                                </Button>
+                            </div>
                         )}
                     </div>
                 );
