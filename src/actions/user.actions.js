@@ -131,9 +131,14 @@ const login = () => {
 }
 
 
+const loadBackup = (data) => {
+    return { type: userConstants.LOAD_BACKUP_SUCCESS, data };
+};
+
 export const userActions = {
     getMe,
     exportData,
     previewData,
-    login
+    login,
+    loadBackup
 };

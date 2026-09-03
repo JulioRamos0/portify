@@ -15,5 +15,7 @@ export const userConstants = {
 
     PREVIEW_REQUEST: `${context}_PREVIEW_REQUEST`,
     PREVIEW_SUCCESS: `${context}_PREVIEW_SUCCESS`,
-    PREVIEW_FAILURE: `${context}_PREVIEW_FAILURE`
+    PREVIEW_FAILURE: `${context}_PREVIEW_FAILURE`,
+
+    LOAD_BACKUP_SUCCESS: `${context}_LOAD_BACKUP_SUCCESS`
 }

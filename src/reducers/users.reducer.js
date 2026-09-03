@@ -3,7 +3,8 @@ import { userConstants } from '../constants';
 const defaultState = {
     display_name: "User Name",
     migrationData: null,
-    loadingPreview: false
+    loadingPreview: false,
+    isFromBackup: false
 };
 
 export const user = (state = defaultState, action) => {
@@ -28,6 +29,12 @@ export const user = (state = defaultState, action) => {
             return {
                 ...state,
                 loadingPreview: false
+            };
+        case userConstants.LOAD_BACKUP_SUCCESS:
+            return {
+                ...state,
+                migrationData: action.data,
+                isFromBackup: true
             };
         default: return state;
     }
