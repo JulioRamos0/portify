@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import { config } from './config';
 import { alertActions, userActions } from './actions'
 import MigrationWizard from './components/MigrationWizard';
-import Link from '@material-ui/core/Link';
+
 
 const styles = theme => ({
     appBarSpacer: {
@@ -148,22 +148,26 @@ class Main extends Component {
 
                             {!this.state.userLoged && (
                                 <Grid container direction="column" alignItems="center" style={{ marginTop: 24 }}>
+
+
                                     <Button
                                         onClick={this.onLogin}
                                         variant="contained"
-                                        color="primary"
+                                        color="secondary"
                                         size="large"
                                     >
                                         Comenzar
                                     </Button>
-                                    <Link
-                                        component="button"
-                                        variant="body2"
+                                    <Button
                                         onClick={this.onLoadBackupClick}
+                                        variant="text"
+                                        color="info"
+                                        size="small"
                                         style={{ marginTop: 16 }}
+
                                     >
                                         Usar respaldo
-                                    </Link>
+                                    </Button>
                                     <input
                                         type="file"
                                         accept=".json"

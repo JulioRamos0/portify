@@ -275,8 +275,8 @@ function MigrationWizard(props) {
                             </div>
                         ) : (
                             <Button
-                                variant="outlined"
-                                color="primary"
+                                variant="contained"
+                                color="secondary"
                                 className={classes.button}
                                 onClick={handleConnectDestination}
                             >
