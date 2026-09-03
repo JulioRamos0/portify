@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/portify/static/js/main.cb970f3b.js",
+    "main.js": "/portify/static/js/main.cb777c9d.js",
     "index.html": "/portify/index.html",
-    "main.cb970f3b.js.map": "/portify/static/js/main.cb970f3b.js.map"
+    "main.cb777c9d.js.map": "/portify/static/js/main.cb777c9d.js.map"
   },
   "entrypoints": [
-    "static/js/main.cb970f3b.js"
+    "static/js/main.cb777c9d.js"
   ]
 }
